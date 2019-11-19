@@ -104,6 +104,7 @@ Q1:
 tab1 = xtabs(~infected+treatment, data=filter(avast))
 rowPerc(tab1)
 ```
+
 It appears that for those that have aids, have a higher chance of thriving with the drug than the placebo. The people who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q2:
@@ -111,6 +112,7 @@ Q2:
 tab2 = xtabs(~infected+treatment, data=filter(avast, sex== 'gal'))
 rowPerc(tab2)
 ```
+
 It appears that for the women that have aids,they have a higher chance of thriving with the drug than the placebo. The women who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q3:
@@ -118,6 +120,7 @@ Q3:
 tab3 = xtabs(~infected+treatment, data=filter(avast, sex== 'guy'))
 rowPerc(tab3)
 ```
+
 It appears that for the men that have aids, they have a lower chance of thriving with the drug than the placebo. The men who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q4:
@@ -125,6 +128,7 @@ Q4:
 tab4 = xtabs(~infected+treatment, data=filter(avast, DrugUser== 'yes'))
 rowPerc(tab4)
 ```
+
 It appears that for the Drug users that have aids, they have a lower chance of thriving with the drug than the placebo. The Drug users who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q5:
@@ -132,6 +136,7 @@ Q5:
 tab5 = xtabs(~infected+treatment, data=filter(avast, LGBTQ== 'gay'))
 rowPerc(tab5)
 ```
+
 It appears that for LGBTQ people that have aids, they have a lower chance of thriving with the drug than the placebo. The LGBTQ people who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 ## Inferential Results
@@ -143,26 +148,35 @@ Q1:
 chisqtestGC(tab1)
 ```
 
+The p-value for the Chisq test is 0 < 0.05 so we reject the null hypothesis and conclude we have the evidence to support the contention that the vaccine for people with aids is affective.
+
 Q2:
 ```{r}
 chisqtestGC(tab2)
 ```
+
+The p-value for the Chisq test is 0 < 0.05 so we reject the null hypothesis and conclude we have the evidence to support the contention that the vaccine for women with aids is affective.
 
 Q3:
 ```{r}
 chisqtestGC(tab3)
 ```
 
+The p-value for the Chisq test is 0.0001 < 0.05 so we would reject the null hypothesis but conclude that the vaccine makes guys more suseptable to contracting Aids. 
+
 Q4:
 ```{r}
 chisqtestGC(tab4)
 ```
+
+The p-value for the Chisq test is 0 < 0.05 so we reject the null hypothesis and conclude we have the evidence to support the contention that the vaccine for Drug users with aids is affective.
 
 Q5:
 ```{r}
 chisqtestGC(tab5)
 ```
 
+The p-value for the Chisq test is 0 < 0.05 so we reject the null hypothesis and conclude we have the evidence to support the contention that the vaccine for LGBTQ people with aids is affective.
 
 # Discussion and Conclusion
 
