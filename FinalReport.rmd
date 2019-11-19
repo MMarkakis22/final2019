@@ -1,7 +1,7 @@
 ---
 title: "Aides Drug"
-author: "Put your name here!"
-date: "put the date here"
+author: "Melissa Markakis"
+date: "November 18, 2019"
 output: html_document
 ---
 
@@ -15,11 +15,38 @@ avast <-read.csv(file="avastivironal.csv",header=TRUE)
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?.  If you skimp in this section expect to be marked down in your grade. Paint a picture of the project a couple of paragraphs is expected!-->
 
-A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. Finish this!
+A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. The data came from a clinical trial. The trial is trying to find out if the medication makes a difference in treating aids. Does gender make a difference? The trials also tried to answer whether drug users have a different affectand/or sexual preference makes a difference?
 
 # Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
+
+In everyone one of the tests we will be looking into if there is a relationship with the categorical variable and the null hypothesis. we will be using a bar graph, a cross tab table and a chi-square test.
+
+Q1: Is the vaccine affective for the whole population?
+
+$H_0$: The vaccine is inaffective.  
+$H_A$: The vaccine affects whether or not one contracts aids.  
+
+Q2: Does the vaccine prove affective for women?
+
+$H_0$: The vaccine does not prove affective for women.  
+$H_A$: The vaccine affects whether or not a women contracts aids.   
+
+Q3: Does the vaccine prove affective for men?
+
+$H_0$: The vaccine does not prove to be affective for men.
+$H_A$: The vaccine affects whether or not men contracts aids.
+
+Q4: Is the vaccine affective for drug users?
+
+$H_0$: The vaccine is not affetcive for drug users.
+$H_A$: The vaccine affects whether or not drug users contracts aids.
+
+Q5: Is the vaccine affective for LGBTQ people?
+
+$H_0$: The vaccine is inaffective in LGBTQ people.
+$H_A$: The vaccine affects whether or not LGBTQ people contracts aids
 
 #Results
 
@@ -31,13 +58,99 @@ A new  preventative aides (abacavirinol) is under test in clinical trials. Analy
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
 
+Q1: 
+```{r}
+barchartGC(~infected+treatment, data= avast, main = 'POPULATION', type = 'percent', horizontal= TRUE)
+```
+Based on the data in the above bar chart, it appears that the drug was more affective than the placebo. It appears that people that dont have aids have a very similar result between the drug and the placebo. It appears that we would reject the null hypothesis for this bar graoh test.
+
+Q2:
+```{r}
+barchartGC(~infected+treatment, main = 'gal', type = 'percent',  data=filter(avast, sex == 'gal'), horizontal = TRUE)
+```
+Based on the data in the above bar chart, it appears that the drug was more affective than the placebo for women. It appears that women that dont have aids have a very similar result between the drug and the placebo. It appears that we would reject the null hypothesis for this bar graph test.
+
+Q3:
+```{r}
+barchartGC(~infected+treatment, main = 'guy', type = 'percent',  data=filter(avast, sex == 'guy'), horizontal = TRUE)
+```
+Based on the data in the above bar chart, it appears that the drug was less affective than the placebo for men. It appears that men that dont have aids have a very similar result between the drug and the placebo. It appears that we would fail to reject the null hypothesis for this bar graph test.
+
+Q4:
+```{r}
+barchartGC(~infected+treatment, , main = 'DrugUser', type = 'percent',  data=filter(avast, DrugUser == 'yes'), horizontal = TRUE)
+```
+Based on the data in the above bar chart, it appears that the drug was much more affective than the placebo for Drug users. It appears that drug users that dont have aids have a very similar result between the drug and the placebo. It appears that we would reject the null hypothesis for this bar graph test.
+
+Q5:
+```{r}
+barchartGC(~infected+treatment, , main = 'LGBTQ', type = 'percent',  data=filter(avast, LGBTQ == 'gay'), horizontal = TRUE)
+```
+Based on the data in the above bar chart, it appears that the drug was much less affective than the placebo for LGBTQ people. It appears that LGBTQ people that dont have aids have a very similar result between the drug and the placebo. It appears that we would fail to reject the null hypothesis for this bar graph test.
+
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+Q1:
+```{r}
+tab1 = xtabs(~infected+treatment, data=filter(avast))
+rowPerc(tab1)
+```
+
+Q2:
+```{r}
+tab2 = xtabs(~infected+treatment, data=filter(avast, sex== 'gal'))
+rowPerc(tab2)
+```
+
+Q3:
+```{r}
+tab3 = xtabs(~infected+treatment, data=filter(avast, sex== 'guy'))
+rowPerc(tab3)
+```
+
+Q4:
+```{r}
+tab4 = xtabs(~infected+treatment, data=filter(avast, DrugUser== 'yes'))
+rowPerc(tab4)
+```
+
+Q5:
+```{r}
+tab5 = xtabs(~infected+treatment, data=filter(avast, LGBTQ== 'gay'))
+rowPerc(tab5)
+```
+
+
 ## Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+Q1:
+```{r}
+chisqtestGC(tab1)
+```
+
+Q2:
+```{r}
+chisqtestGC(tab2)
+```
+
+Q3:
+```{r}
+chisqtestGC(tab3)
+```
+
+Q4:
+```{r}
+chisqtestGC(tab4)
+```
+
+Q5:
+```{r}
+chisqtestGC(tab5)
+```
 
 
 # Discussion and Conclusion
