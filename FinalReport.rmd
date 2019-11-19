@@ -15,7 +15,9 @@ avast <-read.csv(file="avastivironal.csv",header=TRUE)
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?.  If you skimp in this section expect to be marked down in your grade. Paint a picture of the project a couple of paragraphs is expected!-->
 
-A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. The data came from a clinical trial. The trial is trying to find out if the medication makes a difference in treating aids. Does gender make a difference? The trials also tried to answer whether drug users have a different affectand/or sexual preference makes a difference?
+A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation.
+
+The data came from a clinical trial. The trial is trying to find out if the medication makes a difference in treating aids. Does gender make a difference? The trials also tried to answer whether drug users have a different affect and/or sexual preference makes a difference?
 
 # Methods
 
@@ -35,17 +37,17 @@ $H_A$: The vaccine affects whether or not a women contracts aids.
 
 Q3: Does the vaccine prove affective for men?
 
-$H_0$: The vaccine does not prove to be affective for men.
+$H_0$: The vaccine does not prove to be affective for men.  
 $H_A$: The vaccine affects whether or not men contracts aids.
 
 Q4: Is the vaccine affective for drug users?
 
-$H_0$: The vaccine is not affetcive for drug users.
+$H_0$: The vaccine is not affetcive for drug users.  
 $H_A$: The vaccine affects whether or not drug users contracts aids.
 
 Q5: Is the vaccine affective for LGBTQ people?
 
-$H_0$: The vaccine is inaffective in LGBTQ people.
+$H_0$: The vaccine is inaffective in LGBTQ people.  
 $H_A$: The vaccine affects whether or not LGBTQ people contracts aids
 
 #Results
@@ -62,30 +64,35 @@ Q1:
 ```{r}
 barchartGC(~infected+treatment, data= avast, main = 'POPULATION', type = 'percent', horizontal= TRUE)
 ```
+
 Based on the data in the above bar chart, it appears that the drug was more affective than the placebo. It appears that people that dont have aids have a very similar result between the drug and the placebo. It appears that we would reject the null hypothesis for this bar graoh test.
 
 Q2:
 ```{r}
 barchartGC(~infected+treatment, main = 'gal', type = 'percent',  data=filter(avast, sex == 'gal'), horizontal = TRUE)
 ```
+
 Based on the data in the above bar chart, it appears that the drug was more affective than the placebo for women. It appears that women that dont have aids have a very similar result between the drug and the placebo. It appears that we would reject the null hypothesis for this bar graph test.
 
 Q3:
 ```{r}
 barchartGC(~infected+treatment, main = 'guy', type = 'percent',  data=filter(avast, sex == 'guy'), horizontal = TRUE)
 ```
+
 Based on the data in the above bar chart, it appears that the drug was less affective than the placebo for men. It appears that men that dont have aids have a very similar result between the drug and the placebo. It appears that we would fail to reject the null hypothesis for this bar graph test.
 
 Q4:
 ```{r}
-barchartGC(~infected+treatment, , main = 'DrugUser', type = 'percent',  data=filter(avast, DrugUser == 'yes'), horizontal = TRUE)
+barchartGC(~ infected+treatment, , main = 'DrugUser', type = 'percent',  data=filter(avast, DrugUser == 'yes'), horizontal = TRUE)
 ```
+
 Based on the data in the above bar chart, it appears that the drug was much more affective than the placebo for Drug users. It appears that drug users that dont have aids have a very similar result between the drug and the placebo. It appears that we would reject the null hypothesis for this bar graph test.
 
 Q5:
 ```{r}
 barchartGC(~infected+treatment, , main = 'LGBTQ', type = 'percent',  data=filter(avast, LGBTQ == 'gay'), horizontal = TRUE)
 ```
+
 Based on the data in the above bar chart, it appears that the drug was much less affective than the placebo for LGBTQ people. It appears that LGBTQ people that dont have aids have a very similar result between the drug and the placebo. It appears that we would fail to reject the null hypothesis for this bar graph test.
 
 ### Numerical Descriptive Results
@@ -97,31 +104,35 @@ Q1:
 tab1 = xtabs(~infected+treatment, data=filter(avast))
 rowPerc(tab1)
 ```
+It appears that for those that have aids, have a higher chance of thriving with the drug than the placebo. The people who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q2:
 ```{r}
 tab2 = xtabs(~infected+treatment, data=filter(avast, sex== 'gal'))
 rowPerc(tab2)
 ```
+It appears that for the women that have aids,they have a higher chance of thriving with the drug than the placebo. The women who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q3:
 ```{r}
 tab3 = xtabs(~infected+treatment, data=filter(avast, sex== 'guy'))
 rowPerc(tab3)
 ```
+It appears that for the men that have aids, they have a lower chance of thriving with the drug than the placebo. The men who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q4:
 ```{r}
 tab4 = xtabs(~infected+treatment, data=filter(avast, DrugUser== 'yes'))
 rowPerc(tab4)
 ```
+It appears that for the Drug users that have aids, they have a lower chance of thriving with the drug than the placebo. The Drug users who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 Q5:
 ```{r}
 tab5 = xtabs(~infected+treatment, data=filter(avast, LGBTQ== 'gay'))
 rowPerc(tab5)
 ```
-
+It appears that for LGBTQ people that have aids, they have a lower chance of thriving with the drug than the placebo. The LGBTQ people who dont have aids show no significant change in affectivness between the drug and the placebo.
 
 ## Inferential Results
 
